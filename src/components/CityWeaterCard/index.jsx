@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -51,7 +51,7 @@ const CityWeatherCard = ({
           id={styles.updateButton}
           size="small"
           variant="contained"
-          color="success"
+          color="primary"
           onClick={(event) => onUpdate(cityName, event)}
         >
           update
@@ -61,4 +61,4 @@ const CityWeatherCard = ({
   );
 };
 
-export default CityWeatherCard;
+export default memo(CityWeatherCard);
