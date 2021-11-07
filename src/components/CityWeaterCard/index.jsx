@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import Button from "@mui/material/Button";
 
 import styles from "./index.module.css";
 
@@ -15,10 +16,11 @@ const CityWeatherCard = ({
   wetherIconUrl,
   index,
   onDelete,
+  onUpdate,
 }) => {
   return (
     <Card sx={{ display: "flex", marginBottom: "20px" }}>
-      <Box sx={{ display: "flex", flexDirection: "column", width: "50%" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "40%" }}>
         <CardContent>
           <Typography component="div" variant="h5">
             {cityName}
@@ -40,11 +42,20 @@ const CityWeatherCard = ({
         </CardContent>
       </Box>
       <CardMedia component="img" sx={{ width: "25%" }} image={wetherIconUrl} />
-      <Box sx={{ display: "flex", flexDirection: "column", width: "25%" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", width: "35%" }}>
         <HighlightOffIcon
           className={styles.deleteButton}
           onClick={(event) => onDelete(index, event)}
         />
+        <Button
+          id={styles.updateButton}
+          size="small"
+          variant="contained"
+          color="success"
+          onClick={(event) => onUpdate(cityName, event)}
+        >
+          update
+        </Button>
       </Box>
     </Card>
   );

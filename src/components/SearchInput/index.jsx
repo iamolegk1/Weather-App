@@ -17,6 +17,7 @@ const SearchInput = ({ onChangeHandler, onClickEnter }) => {
   const onPressEnter = (event) => {
     if (event.key === "Enter") {
       onClickEnter();
+      setInputValue("");
     }
   };
 
