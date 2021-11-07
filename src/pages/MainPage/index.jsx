@@ -4,21 +4,33 @@ import SearchInput from "../../components/SearchInput";
 import SearchButton from "../../components/SearchButton";
 import CityWeatherCard from "../../components/CityWeaterCard";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
+
 import API from "../../api";
 
 import styles from "./index.module.css";
 
 const MainPage = () => {
   const [cityName, setCityName] = useState("");
-  const [cityWeather, setCityWeather] = useState(null);
+
+  const [storage, setStorage] = useLocalStorage("weather", []);
 
   const onSearch = async () => {
     try {
       const { data } = await API.get(`/data/2.5/weather?q=${cityName}`);
-      setCityWeather(data);
+      setStorage([data, ...storage]);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const onDelete = (index, event) => {
+    event.preventDefault();
+
+    const cities = [...storage];
+    cities.splice(index, 1);
+
+    setStorage(cities);
   };
 
   return (
@@ -28,14 +40,20 @@ const MainPage = () => {
         <SearchButton onClickHandler={onSearch} isDisabled={!cityName} />
       </div>
       <div className={styles.cityWeatherCard}>
-        {cityWeather && (
-          <CityWeatherCard
-            cityName={cityWeather.name}
-            mainWeather={cityWeather.weather[0].main}
-            weatherDescription={cityWeather.weather[0].description}
-            wetherIconUrl={`http://openweathermap.org/img/wn/${cityWeather.weather[0].icon}@2x.png`}
-          />
-        )}
+        {storage &&
+          storage.map((city, index) => {
+            return (
+              <CityWeatherCard
+                cityName={city.name}
+                mainWeather={city.weather[0].main}
+                weatherDescription={city.weather[0].description}
+                wetherIconUrl={`http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
+                index={index}
+                onDelete={onDelete}
+                key={index}
+              />
+            );
+          })}
       </div>
     </div>
   );

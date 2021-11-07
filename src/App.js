@@ -7,8 +7,8 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/" component={MainPage} exact />
-        <Route path="/cities/:id" component={<></>} exact />
-        <Route component={<div>Page not found</div>} />
+        <Route path="/cities/:id" render={() => <div></div>} exact />
+        <Route render={() => <div>Page not found</div>} />
       </Switch>
     </Router>
   );
