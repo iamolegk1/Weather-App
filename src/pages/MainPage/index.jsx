@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import SearchInput from "../../components/SearchInput";
 import SearchButton from "../../components/SearchButton";
 import CityWeatherCard from "../../components/CityWeaterCard";
+import CityCounter from "../../components/CityCounder";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -81,15 +82,22 @@ const MainPage = () => {
         <SearchButton onClickHandler={onSearch} isDisabled={!cityName} />
       </div>
       <Stack direction="row" spacing={2}>
+        <CityCounter value={storage.length} />
         <LoadingButton
           onClick={onUpdateAll}
           loading={isLoading}
           loadingIndicator="Loading..."
           variant="outlined"
+          disabled={isLoading || !storage.length}
         >
           update all
         </LoadingButton>
-        <Button onClick={onDeleteAll} variant="outlined" color="error">
+        <Button
+          onClick={onDeleteAll}
+          variant="outlined"
+          color="error"
+          disabled={isLoading || !storage.length}
+        >
           delete all
         </Button>
       </Stack>

@@ -1,0 +1,7 @@
+.wrapper svg {
+  height: unset;
+}
+
+.wrapper span {
+  top: 5px;
+}
