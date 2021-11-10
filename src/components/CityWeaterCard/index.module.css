@@ -12,7 +12,7 @@
 }
 
 #updateButton {
-  display: block;
+  display: flex;
   width: 50%;
   margin: auto 8px 8px auto;
 }

@@ -107,9 +107,10 @@ const MainPage = () => {
             return (
               <CityWeatherCard
                 cityName={city.name}
+                cityTemp={`${Math.round(city.main.temp)}°`}
                 mainWeather={city.weather[0].main}
                 weatherDescription={city.weather[0].description}
-                wetherIconUrl={`http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
+                weatherIconUrl={`http://openweathermap.org/img/wn/${city.weather[0].icon}@2x.png`}
                 index={index}
                 onDelete={onDelete}
                 onUpdate={onUpdate}
