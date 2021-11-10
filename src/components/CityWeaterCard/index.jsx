@@ -12,8 +12,9 @@ import styles from "./index.module.css";
 const CityWeatherCard = ({
   cityName,
   mainWeather,
+  cityTemp,
   weatherDescription,
-  wetherIconUrl,
+  weatherIconUrl,
   index,
   onDelete,
   onUpdate,
@@ -24,6 +25,9 @@ const CityWeatherCard = ({
         <CardContent>
           <Typography component="div" variant="h5">
             {cityName}
+          </Typography>
+          <Typography variant="h6" gutterBottom component="div">
+            {cityTemp}
           </Typography>
           <Typography
             variant="subtitle1"
@@ -41,8 +45,8 @@ const CityWeatherCard = ({
           </Typography>
         </CardContent>
       </Box>
-      <CardMedia component="img" sx={{ width: "25%" }} image={wetherIconUrl} />
-      <Box sx={{ display: "flex", flexDirection: "column", width: "35%" }}>
+      <CardMedia component="img" sx={{ width: "35%" }} image={weatherIconUrl} />
+      <Box sx={{ display: "flex", flexDirection: "column", width: "25%" }}>
         <HighlightOffIcon
           className={styles.deleteButton}
           onClick={(event) => onDelete(index, event)}
