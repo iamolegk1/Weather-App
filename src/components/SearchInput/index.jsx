@@ -23,6 +23,7 @@ const SearchInput = ({ onChangeHandler, onClickEnter }) => {
 
   useEffect(() => {
     onChangeHandler(inputValue);
+    // eslint-disable-next-line
   }, [inputValue]);
 
   return (
