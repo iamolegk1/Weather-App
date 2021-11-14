@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Input from "@mui/material/Input";
 
-const SearchInput = ({ onChangeHandler, onClickEnter }) => {
+const SearchInput = ({ onChangeHandler, onClickEnter, isClearValue }) => {
   const [inputValue, setInputValue] = useState("");
 
   const onChangeInputValue = (event) => {
@@ -17,7 +17,6 @@ const SearchInput = ({ onChangeHandler, onClickEnter }) => {
   const onPressEnter = (event) => {
     if (event.key === "Enter") {
       onClickEnter();
-      setInputValue("");
     }
   };
 
@@ -25,6 +24,11 @@ const SearchInput = ({ onChangeHandler, onClickEnter }) => {
     onChangeHandler(inputValue);
     // eslint-disable-next-line
   }, [inputValue]);
+
+  useEffect(() => {
+    if (!isClearValue) return;
+    setInputValue("");
+  }, [isClearValue]);
 
   return (
     <Input

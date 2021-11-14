@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Button from "@mui/material/Button";
@@ -17,6 +17,7 @@ import styles from "./index.module.css";
 const MainPage = () => {
   const [cityName, setCityName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isClearValue, setIsClearValue] = useState(false);
 
   const [storage, setStorage] = useLocalStorage("weather", []);
 
@@ -24,8 +25,11 @@ const MainPage = () => {
     try {
       const { data } = await API.get(`/data/2.5/weather?q=${cityName}`);
       setStorage([data, ...storage]);
+      setIsClearValue(true);
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsClearValue(false);
     }
   };
 
@@ -78,7 +82,11 @@ const MainPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
-        <SearchInput onChangeHandler={setCityName} onClickEnter={onSearch} />
+        <SearchInput
+          onChangeHandler={setCityName}
+          onClickEnter={onSearch}
+          isClearValue={isClearValue}
+        />
         <SearchButton onClickHandler={onSearch} isDisabled={!cityName} />
       </div>
       <Stack direction="row" spacing={2}>
