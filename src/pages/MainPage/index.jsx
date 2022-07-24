@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Stack from "@mui/material/Stack";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Button from "@mui/material/Button";
@@ -78,6 +78,23 @@ const MainPage = () => {
   const onDeleteAll = () => {
     setStorage([]);
   };
+
+  const asyncFunction = async () => {
+    try {
+      return await API.get(`/data/2.5/weather?q=${"London"}`);
+    } catch (error) {}
+
+    // return new Promise((resolve) => {
+    //   const data = API.get(`/data/2.5/weather?q=${"London"}`);
+    //   resolve(data);
+    // })
+    //   .then((data) => console.log(data))
+    //   .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    asyncFunction();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
